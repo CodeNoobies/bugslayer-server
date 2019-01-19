@@ -1,0 +1,17 @@
+{
+  "name": "bugslayer-api",
+  "version": "0.0.1",
+  "description": "The API services for our game and web clients.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "bugslayer",
+    "game",
+    "graphql",
+    "unreal"
+  ],
+  "author": "Andres Perez <im.oxyrus@gmail.com>",
+  "license": "MIT"
+}
