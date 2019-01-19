@@ -2,19 +2,27 @@ require('dotenv').config();
 
 const express = require('express');
 const cors = require('cors');
-const { ApolloServer, gql } = require('apollo-server-express');
+const { ApolloServer } = require('apollo-server-express');
+
+const typeDefs = require('./graphql');
 
 const port = process.env.PORT || 6000;
 
-const typeDefs = gql`
-  type Query {
-    hello: String
-  }
-`;
-
 const resolvers = {
   Query: {
-    hello: () => 'Hello World',
+    users() {
+      const users = [
+        {
+          id: 1,
+          name: 'Oxy',
+        },
+        {
+          id: 2,
+          name: 'Pepe',
+        },
+      ];
+      return users;
+    },
   },
 };
 
