@@ -1,8 +1,30 @@
 const express = require('express');
+const { ApolloServer, gql } = require('apollo-server-express');
+
+const port = 3000;
+
+const typeDefs = gql`
+  type Query {
+    hello: String
+  }
+`;
+
+const resolvers = {
+  Query: {
+    hello: () => 'Hello World',
+  },
+};
+
+const server = new ApolloServer({
+  typeDefs,
+  resolvers,
+});
 
 const app = express();
-const PORT = 3000;
+server.applyMiddleware({ app, path: '/graphql' });
 
-app.get('/', (req, res) => res.send('Hello world!'));
-
-app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+app.listen({ port }, () =>
+  console.log(
+    `🚀 Server ready at http://localhost:${port}${server.graphqlPath}`
+  )
+);
