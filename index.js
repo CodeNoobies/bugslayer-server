@@ -1,8 +1,10 @@
+require('dotenv').config();
+
 const express = require('express');
 const cors = require('cors');
 const { ApolloServer, gql } = require('apollo-server-express');
 
-const port = 3000;
+const port = process.env.PORT || 6000;
 
 const typeDefs = gql`
   type Query {
