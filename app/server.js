@@ -4,30 +4,14 @@ const express = require('express');
 const cors = require('cors');
 const { ApolloServer } = require('apollo-server-express');
 
-const typeDefs = require('./graphql');
+const { User } = require('./graphql/typedefs');
+const Query = require('./graphql/schema');
+const resolvers = require('./graphql/resolvers');
 
 const port = process.env.PORT || 6000;
 
-const resolvers = {
-  Query: {
-    users() {
-      const users = [
-        {
-          id: 1,
-          name: 'Oxy',
-        },
-        {
-          id: 2,
-          name: 'Pepe',
-        },
-      ];
-      return users;
-    },
-  },
-};
-
 const server = new ApolloServer({
-  typeDefs,
+  typeDefs: [Query, User],
   resolvers,
 });
 
