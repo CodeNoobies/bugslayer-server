@@ -1,7 +1,7 @@
 const typeDef = `
   type User {
     id: Int!
-    name: String!
+    username: String!
   }
 `;
 
