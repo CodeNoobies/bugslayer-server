@@ -58,6 +58,11 @@ const resolvers = {
     },
   },
   Mutation: {
+    /**
+     * Saves a new user into the database and returns the newly created user
+     * @param {object} input - Object containing an username and an email
+     * @return {object} - The newly created user
+     */
     createUser: async (obj, { input }) => {
       const user = await knex('users').insert({
         username: input.username,
@@ -72,6 +77,11 @@ const resolvers = {
       return createdUser;
     },
 
+    /**
+     * Saves a new forum category into the database and returns the newly created category
+     * @param {object} input - Object containing a name
+     * @return {object} - The newly created forum category
+     */
     createForumCategory: async (obj, { input }) => {
       const forumCategory = await knex('forum_categories').insert({
         name: input.name,
