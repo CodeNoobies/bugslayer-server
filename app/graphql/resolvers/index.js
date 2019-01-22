@@ -1,9 +1,13 @@
 const knex = require('../../db');
 
 const resolvers = {
+  /**
+   * The main Query implementation
+   */
   Query: {
     /**
-     * Returns an array of users
+     * Returns a list of all the existing users
+     * @return {Array} - List of users
      */
     users: async () => {
       const users = await knex
@@ -11,8 +15,13 @@ const resolvers = {
         .select('id', 'username', 'email', 'is_staff');
       return users;
     },
+
     /**
-     * Returns a single user based on a given username
+     * Returns the data for a specific user given an username
+     * @param {object} _ - Object that contains the returned value from the
+     * resolver on the parent field
+     * @param {object} args - Arguments passed into the field in the query
+     * @return {(object|null)} - User object or null if the user wasn't found
      */
     user: async (_, args) => {
       const user = await knex('users')
@@ -22,6 +31,10 @@ const resolvers = {
       return user;
     },
 
+    /**
+     * Returns a list of all the existing forum categories
+     * @return {Array} - List of forum categories
+     */
     forumCategories: async () => {
       const forumCategories = await knex
         .from('forum_categories')
@@ -29,6 +42,13 @@ const resolvers = {
       return forumCategories;
     },
 
+    /**
+     * Returns a single forum category based on a given name
+     * @param {object} _ - object that contains the returned value from the
+     * resolver on the parent field
+     * @param {object} args - Arguments passed into the field in the query
+     * @return {(object|null)} - Forum category or null if the category wasn't found
+     */
     forumCategory: async (_, args) => {
       const forumCategory = await knex('forum_categories')
         .select('id', 'name')
