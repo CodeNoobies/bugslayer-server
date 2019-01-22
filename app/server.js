@@ -4,14 +4,14 @@ const express = require('express');
 const cors = require('cors');
 const { ApolloServer } = require('apollo-server-express');
 
-const { User } = require('./graphql/typedefs');
-const Query = require('./graphql/schema');
+const { User, ForumCategory } = require('./graphql/typedefs');
+const { Query, Mutation } = require('./graphql/schema');
 const resolvers = require('./graphql/resolvers');
 
 const port = process.env.PORT || 6000;
 
 const server = new ApolloServer({
-  typeDefs: [Query, User],
+  typeDefs: [Query, Mutation, User, ForumCategory],
   resolvers,
 });
 
