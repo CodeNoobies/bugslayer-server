@@ -63,7 +63,7 @@ const resolvers = {
      * @param {object} input - Object containing an username and an email
      * @return {object} - The newly created user
      */
-    createUser: async (obj, { input }) => {
+    createUser: async (_, { input }) => {
       const user = await knex('users').insert({
         username: input.username,
         email: input.email,
@@ -82,7 +82,7 @@ const resolvers = {
      * @param {object} input - Object containing a name
      * @return {object} - The newly created forum category
      */
-    createForumCategory: async (obj, { input }) => {
+    createForumCategory: async (_, { input }) => {
       const forumCategory = await knex('forum_categories').insert({
         name: input.name,
       });
