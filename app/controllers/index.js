@@ -8,7 +8,7 @@ const {
   getAllForumCategories,
   getForumCategoryByID,
   getForumCategoryByName,
-  createForumCategory,
+  saveForumCategory,
 } = require('./forum_categories_controller');
 const { getAllForumThreads } = require('./forum_threads_controller');
 
@@ -20,6 +20,6 @@ module.exports = {
   getAllForumCategories,
   getForumCategoryByID,
   getForumCategoryByName,
-  createForumCategory,
+  saveForumCategory,
   getAllForumThreads,
 };
