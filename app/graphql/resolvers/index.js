@@ -1,11 +1,13 @@
-const knex = require('../../db');
 const {
   getAllUsers,
   getUserByID,
   getUserByUsername,
+  createUser,
   getAllForumCategories,
   getForumCategoryByID,
   getForumCategoryByName,
+  createForumCategory,
+  getAllForumThreads,
 } = require('../../controllers');
 
 const resolvers = {
@@ -60,10 +62,8 @@ const resolvers = {
      * @return {Array} - List of forum threads
      */
     forumThreads: async () => {
-      const forumThread = await knex
-        .select('id', 'title', 'user_id', 'forum_category_id')
-        .from('forum_threads');
-      return forumThread;
+      const forumThreads = await getAllForumThreads();
+      return forumThreads;
     },
   },
 
@@ -77,16 +77,8 @@ const resolvers = {
      * @return {object} - The newly created user
      */
     createUser: async (_, { input }) => {
-      await knex('users').insert({
-        username: input.username,
-        email: input.email,
-      });
-
-      const createdUser = await knex('users')
-        .select('id', 'username', 'email', 'is_staff')
-        .where({ username: input.username })
-        .first();
-
+      await createUser(input);
+      const createdUser = await getUserByUsername(input.username);
       return createdUser;
     },
 
@@ -96,15 +88,8 @@ const resolvers = {
      * @return {object} - The newly created forum category
      */
     createForumCategory: async (_, { input }) => {
-      await knex('forum_categories').insert({
-        name: input.name,
-      });
-
-      const createdForumCategory = await knex('forum_categories')
-        .select('id', 'name')
-        .where({ name: input.name })
-        .first();
-
+      await createForumCategory(input);
+      const createdForumCategory = await getForumCategoryByName(input.name);
       return createdForumCategory;
     },
   },
