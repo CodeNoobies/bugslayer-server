@@ -16,7 +16,7 @@ const getAllUsers = async () => {
 
 /**
  * Returns an user given an id
- * @param {int} id - ID used to find the user in the database
+ * @param {number} id - ID used to find the user in the database
  * @return {object} User object
  */
 const getUserByID = async id => {

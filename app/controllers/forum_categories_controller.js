@@ -16,7 +16,7 @@ const getAllForumCategories = async () => {
 
 /**
  * Returns a forum category given an id
- * @param {int} id - ID used to find the forum category in the database
+ * @param {number} id - ID used to find the forum category in the database
  * @return {object} Forum category object
  */
 const getForumCategoryByID = async id => {
