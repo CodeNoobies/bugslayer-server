@@ -1,3 +1,6 @@
+const { GraphQLScalarType } = require('graphql');
+const { Kind } = require('graphql/language');
+
 const {
   getAllUsers,
   getUserByID,
@@ -13,6 +16,23 @@ const {
 } = require('../../controllers');
 
 const resolvers = {
+  Date: new GraphQLScalarType({
+    name: 'Date',
+    description: 'Date custom scalar type',
+    parseValue(value) {
+      return value;
+    },
+    serialize(value) {
+      return value;
+    },
+    parseLiteral(ast) {
+      if (ast.kind === Kind.INT) {
+        return ast.value;
+      }
+      return null;
+    },
+  }),
+
   /**
    * The main Query implementation
    */
