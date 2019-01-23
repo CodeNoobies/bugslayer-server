@@ -8,6 +8,7 @@ const {
   getForumCategoryByName,
   saveForumCategory,
   getAllForumThreads,
+  getForumThreadByID,
 } = require('../../controllers');
 
 const resolvers = {
@@ -64,6 +65,18 @@ const resolvers = {
     forumThreads: async () => {
       const forumThreads = await getAllForumThreads();
       return forumThreads;
+    },
+
+    /**
+     * Returns a single forum thread based on a given id
+     * @param {object} _ - object that contains the returned value from the
+     * resolver on the parent field
+     * @param {object} args - Arguments passed into the field in the query
+     * @return {(object|null)} Forum thread or null if the thread wasn't found
+     */
+    forumThread: async (_, { id }) => {
+      const forumThread = await getForumThreadByID(id);
+      return forumThread;
     },
   },
 

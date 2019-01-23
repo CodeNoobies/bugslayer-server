@@ -14,6 +14,8 @@ const Query = gql`
 
     "Get a list of all the forum threads"
     forumThreads: [ForumThread!]!
+    "Get the data for an individual forum thread"
+    forumThread(id: ID!): ForumThread
   }
 `;
 
