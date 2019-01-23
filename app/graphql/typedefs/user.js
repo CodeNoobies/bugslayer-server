@@ -7,6 +7,7 @@ const typeDef = gql`
     username: String!
     email: String!
     is_staff: Boolean!
+    forumThreads: [ForumThread!]!
   }
 
   "Input required to create a new user"

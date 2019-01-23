@@ -27,7 +27,15 @@ const getForumThreadByID = async id => {
   return forumThread;
 };
 
+const getForumThreadsOfUser = async userID => {
+  const forumThreads = knex('forum_threads')
+    .select(...LIST_OF_FIELDS)
+    .where({ user_id: userID });
+  return forumThreads;
+};
+
 module.exports = {
   getAllForumThreads,
   getForumThreadByID,
+  getForumThreadsOfUser,
 };

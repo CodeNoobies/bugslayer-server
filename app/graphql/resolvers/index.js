@@ -9,6 +9,7 @@ const {
   saveForumCategory,
   getAllForumThreads,
   getForumThreadByID,
+  getForumThreadsOfUser,
 } = require('../../controllers');
 
 const resolvers = {
@@ -129,6 +130,21 @@ const resolvers = {
     forumCategory: async ({ forum_category_id }) => {
       const forumCategory = await getForumCategoryByID(forum_category_id);
       return forumCategory;
+    },
+  },
+
+  /**
+   * User resolvers
+   */
+  User: {
+    /**
+     * Get a list of all the forum threads the user has created
+     * @param {object} user - Object containing the user id
+     * @return {Array} The forum threads array
+     */
+    forumThreads: async ({ id }) => {
+      const forumThreads = await getForumThreadsOfUser(id);
+      return forumThreads;
     },
   },
 };
