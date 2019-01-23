@@ -10,7 +10,7 @@ const LIST_OF_FIELDS = ['id', 'username', 'email', 'is_staff'];
  * @return {Array} Array of objects
  */
 const getAllUsers = async () => {
-  const users = knex.from('users').select(...LIST_OF_FIELDS);
+  const users = knex('users').select(...LIST_OF_FIELDS);
   return users;
 };
 
