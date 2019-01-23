@@ -25,8 +25,15 @@ const getForumCategoryByName = async name => {
   return forumCategory;
 };
 
+const createForumCategory = async forumCategory => {
+  await knex('forum_categories').insert({
+    name: forumCategory.name,
+  });
+};
+
 module.exports = {
   getAllForumCategories,
   getForumCategoryByID,
   getForumCategoryByName,
+  createForumCategory,
 };
