@@ -57,6 +57,10 @@ const resolvers = {
       return forumCategory;
     },
   },
+
+  /**
+   * The main Mutation implementation
+   */
   Mutation: {
     /**
      * Saves a new user into the database and returns the newly created user
