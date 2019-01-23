@@ -11,6 +11,9 @@ const Query = gql`
     forumCategories: [ForumCategory!]!
     "Get the data for an individual forum category based on its name"
     forumCategory(name: String!): ForumCategory
+
+    "Get a list of all the forum threads"
+    forumThreads: [ForumThread!]!
   }
 `;
 
