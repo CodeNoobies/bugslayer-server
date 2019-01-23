@@ -3,7 +3,14 @@ const knex = require('../db');
 /**
  * List of fields we want to query every time
  */
-const LIST_OF_FIELDS = ['id', 'username', 'email', 'is_staff'];
+const LIST_OF_FIELDS = [
+  'id',
+  'username',
+  'email',
+  'is_staff',
+  'created_at',
+  'updated_at',
+];
 
 /**
  * Returns a list of all the users in the database
