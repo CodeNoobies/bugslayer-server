@@ -1,4 +1,12 @@
 const knex = require('../../db');
+const {
+  getAllUsers,
+  getUserByID,
+  getUserByUsername,
+  getAllForumCategories,
+  getForumCategoryByID,
+  getForumCategoryByName,
+} = require('../../controllers');
 
 const resolvers = {
   /**
@@ -10,9 +18,7 @@ const resolvers = {
      * @return {Array} - List of users
      */
     users: async () => {
-      const users = await knex
-        .from('users')
-        .select('id', 'username', 'email', 'is_staff');
+      const users = await getAllUsers();
       return users;
     },
 
@@ -23,11 +29,8 @@ const resolvers = {
      * @param {object} args - Arguments passed into the field in the query
      * @return {(object|null)} - User object or null if the user wasn't found
      */
-    user: async (_, args) => {
-      const user = await knex('users')
-        .select('id', 'username', 'email', 'is_staff')
-        .where({ username: args.username })
-        .first();
+    user: async (_, { username }) => {
+      const user = await getUserByUsername(username);
       return user;
     },
 
@@ -36,9 +39,7 @@ const resolvers = {
      * @return {Array} - List of forum categories
      */
     forumCategories: async () => {
-      const forumCategories = await knex
-        .from('forum_categories')
-        .select('id', 'name');
+      const forumCategories = await getAllForumCategories();
       return forumCategories;
     },
 
@@ -49,12 +50,20 @@ const resolvers = {
      * @param {object} args - Arguments passed into the field in the query
      * @return {(object|null)} - Forum category or null if the category wasn't found
      */
-    forumCategory: async (_, args) => {
-      const forumCategory = await knex('forum_categories')
-        .select('id', 'name')
-        .where({ name: args.name })
-        .first();
+    forumCategory: async (_, { name }) => {
+      const forumCategory = await getForumCategoryByName(name);
       return forumCategory;
+    },
+
+    /**
+     * Returns a list of all the existing forum threads
+     * @return {Array} - List of forum threads
+     */
+    forumThreads: async () => {
+      const forumThread = await knex
+        .select('id', 'title', 'user_id', 'forum_category_id')
+        .from('forum_threads');
+      return forumThread;
     },
   },
 
@@ -97,6 +106,31 @@ const resolvers = {
         .first();
 
       return createdForumCategory;
+    },
+  },
+
+  /**
+   * ForumThread resolvers
+   */
+  ForumThread: {
+    /**
+     * Get the user data of whoever created the forum thread
+     * @param {object} forumThread - Object containing the user_id
+     * @return {object} - The user data of the author of the forum thread
+     */
+    user: async ({ user_id }) => {
+      const user = await getUserByID(user_id);
+      return user;
+    },
+
+    /**
+     * Get the category data of which the forum thread belongs to
+     * @param {object} forumThread - Object containing the forum_category_id
+     * @return {object} - The forum category data
+     */
+    forumCategory: async ({ forum_category_id }) => {
+      const forumCategory = await getForumCategoryByID(forum_category_id);
+      return forumCategory;
     },
   },
 };
