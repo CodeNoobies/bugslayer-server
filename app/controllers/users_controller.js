@@ -23,8 +23,16 @@ const getUserByUsername = async username => {
   return user;
 };
 
+const createUser = async user => {
+  await knex('users').insert({
+    username: user.username,
+    email: user.email,
+  });
+};
+
 module.exports = {
   getAllUsers,
   getUserByID,
   getUserByUsername,
+  createUser,
 };
