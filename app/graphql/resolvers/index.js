@@ -6,7 +6,7 @@ const {
   getAllForumCategories,
   getForumCategoryByID,
   getForumCategoryByName,
-  createForumCategory,
+  saveForumCategory,
   getAllForumThreads,
 } = require('../../controllers');
 
@@ -88,7 +88,7 @@ const resolvers = {
      * @return {object} - The newly created forum category
      */
     createForumCategory: async (_, { input }) => {
-      await createForumCategory(input);
+      await saveForumCategory(input);
       const createdForumCategory = await getForumCategoryByName(input.name);
       return createdForumCategory;
     },
