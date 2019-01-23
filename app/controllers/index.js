@@ -2,7 +2,7 @@ const {
   getAllUsers,
   getUserByID,
   getUserByUsername,
-  createUser,
+  saveUser,
 } = require('./users_controller');
 const {
   getAllForumCategories,
@@ -16,7 +16,7 @@ module.exports = {
   getAllUsers,
   getUserByID,
   getUserByUsername,
-  createUser,
+  saveUser,
   getAllForumCategories,
   getForumCategoryByID,
   getForumCategoryByName,

@@ -2,7 +2,7 @@ const {
   getAllUsers,
   getUserByID,
   getUserByUsername,
-  createUser,
+  saveUser,
   getAllForumCategories,
   getForumCategoryByID,
   getForumCategoryByName,
@@ -77,7 +77,7 @@ const resolvers = {
      * @return {object} - The newly created user
      */
     createUser: async (_, { input }) => {
-      await createUser(input);
+      await saveUser(input);
       const createdUser = await getUserByUsername(input.username);
       return createdUser;
     },
